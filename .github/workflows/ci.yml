@@ -34,3 +34,19 @@ jobs:
               with:
                 name: rust-binary-artifacts-${{ matrix.os }}
                 path: target/release/
+            - name: Set output
+              run: echo "os=${{ matrix.os }}" >> $GITHUB_OUTPUT
+            - name: Archive Release
+              uses: thedoctor0/zip-release@0.7.5
+              with:
+                type: 'zip'
+                filename: 'release-${{ matrix.os }}.zip'
+            
+    # release-project:
+    #     runs-on: ubuntu-latest
+    #     needs: build
+    #     steps:
+    #         - name: Download artifacts
+    #           uses: actions/download-artifact@v4
+    #           with:
+    #             name: rust-binary-artifacts-${{steps.build.outputs.os}}
