@@ -41,6 +41,13 @@ jobs:
               with:
                 type: 'zip'
                 filename: 'release-${{ matrix.os }}.zip'
+            - uses: actions/checkout@v4
+            - uses: ncipollo/release-action@v1
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} #set read and write permissions
+              with:
+                tag: ${{ github.ref_name }}-${{ matrix.os }}
+                name: 'Release ${{ github.ref_name }}'
             
     # release-project:
     #     runs-on: ubuntu-latest
