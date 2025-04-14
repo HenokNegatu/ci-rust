@@ -46,8 +46,8 @@ jobs:
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} #set read and write permissions
               with:
-                tag: ${{ github.ref }}
-                name: 'Release ${{ github.ref }}'
+                tag: ${{ github.ref_name }}
+                name: 'Release ${{ github.ref_name }}'
             
     # release-project:
     #     runs-on: ubuntu-latest
