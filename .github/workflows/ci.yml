@@ -45,6 +45,9 @@ jobs:
             - uses: ncipollo/release-action@v1
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                tag: ${{ github.ref }}
+                name: 'Release ${{ github.ref }}'
             
     # release-project:
     #     runs-on: ubuntu-latest
