@@ -29,10 +29,17 @@ jobs:
       - name: Build Release
         run: cargo build --release --all-features --verbose
 
-      - name: Zip Release
+      - name: Zip Release (Non-Windows)
+        if: runner.os != 'Windows'
         run: |
           mkdir -p artifacts
           zip -r artifacts/release-${{ matrix.os }}.zip target/release/
+
+      - name: Zip Release (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          mkdir artifacts
+          Compress-Archive -Path target/release/* -DestinationPath artifacts/release-windows-latest.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
